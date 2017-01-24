@@ -2,6 +2,7 @@ import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import InlineManifestWebpackPlugin from 'inline-manifest-webpack-plugin';
+import BabiliPlugin from 'babili-webpack-plugin';
 
 process.env.BABEL_ENV = 'webpack';
 
@@ -9,9 +10,10 @@ module.exports = function(env) {
 	env = env || {};
 
 	const config = {
-		performance: {
-			hints: false
-		},
+		// performance: {
+		// 	hints: false
+		// },
+		context: path.resolve(__dirname),
 		entry: {
 			main: './src/main.js'
 			// vendor: ''
@@ -44,7 +46,8 @@ module.exports = function(env) {
 						//  	"plugins": [
 						// 	    "syntax-flow",
 						// 	    "transform-decorators-legacy",
-						// 	    "transform-flow-strip-types"
+						// 	    "transform-flow-strip-types",
+						//      "syntax-dynamic-import"
 						//     ]
 						// }
 				 	}
@@ -68,7 +71,10 @@ module.exports = function(env) {
 	};
 
 	if(env.production) {
-		config.plugins.push(new webpack.optimize.UglifyJsPlugin({sourceMap: true, compress: {warnings: true}}));
+		config.plugins.push(new BabiliPlugin({
+            babel: require("babel-core"),
+            babili: require("babel-preset-babili")
+        }));
 	}
 
 	return config;

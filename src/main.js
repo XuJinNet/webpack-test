@@ -1,5 +1,5 @@
 
-System.import('./b')
+import('./b')
 	.then(b => {
 		b.default.test();
 	});

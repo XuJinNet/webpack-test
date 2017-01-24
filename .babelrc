@@ -5,15 +5,15 @@
         [
           "env",
           {
-			"browsers": [
-				"Chrome >= 49",
-				"Firefox >= 46",
-				"Edge",
-				"Safari >= 9",
-				"not ie < 11",
-				"Android >= 4.4.4",
-				"iOS >= 9"
-			],
+			"targets": {
+              "browsers": [
+                "Chrome >= 49",
+                "Firefox >= 46",
+                "Edge >= 14",
+                "Safari >= 9",
+                "not ie < 11"
+              ]
+            },
             "loose": true,
             "modules": false
           }
@@ -23,7 +23,9 @@
 		"syntax-flow",
 		"transform-decorators-legacy",
 		"transform-flow-strip-types",
-		"transform-class-properties"
+		"transform-class-properties",
+		"transform-function-bind",
+    	"syntax-dynamic-import"
       ]
     },
     "node": {
